@@ -339,6 +339,8 @@ Vou processar e salvar tudo automaticamente! 🚀""",
     
     def send_message(self, chat_id, text):
         """Envia mensagem de resposta"""
+        print(f"[SEND] chat_id={chat_id}, token exists={bool(TELEGRAM_BOT_TOKEN)}")
+        
         if not TELEGRAM_BOT_TOKEN:
             print("[ERRO] TELEGRAM_BOT_TOKEN não configurado")
             return
@@ -351,8 +353,9 @@ Vou processar e salvar tudo automaticamente! 🚀""",
         }
         
         try:
+            print(f"[SEND] Enviando para {url[:50]}...")
             response = requests.post(url, json=payload, timeout=10)
-            print(f"[OK] Mensagem enviada: {response.status_code}")
+            print(f"[SEND] Status: {response.status_code}, Response: {response.text[:100]}")
         except Exception as e:
             print(f"[ERRO] Enviando mensagem: {e}")
 
